@@ -486,10 +486,10 @@ async function submit() {
 
     const routesHtml = p.routes.map(r => '<div class="r-route-tag">'+r+'</div>').join('');
 
-    document.getElementById('resultBody').innerHTML =
+   document.getElementById('resultBody').innerHTML =
       '<div class="r-section"><div class="r-label">You prioritise</div><div class="r-priorities">'+priHtml+'</div></div>'+
-      '<div class="r-section"><div class="r-label">Routes worth exploring</div><div class="r-routes">'+routesHtml+'</div></div>'+
       '<div class="r-section"><div class="r-label">The trade-offs you seem less comfortable with</div><div class="r-tradeoffs">'+p.tradeoffs+'</div></div>'+
+      '<div class="r-section"><div class="r-label">Routes worth exploring</div><div class="r-routes">'+routesHtml+'</div></div>'+
       '<div class="r-section"><div class="r-label">The question to sit with</div><div class="r-question">\u201c'+p.question+'\u201d</div></div>';
 
   } catch(e) {
