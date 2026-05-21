@@ -14,27 +14,32 @@ module.exports = async function handler(req, res) {
   const prompt = `You are analysing someone's answers to an immigration motivation assessment. The assessment helps internationally-trained professionals understand which UK visa path fits the life they want to build — not which one they qualify for.
 
 The three routes are:
-- Skilled Worker Visa: stability, employer-sponsored, predictable path to ILR after 5 years, but status depends on employer
-- Global Talent Visa: freedom to work for anyone or yourself, no sponsor needed, ILR after 3-5 years, but must stay active in endorsed professional field
-- Innovator Founder Visa: run your own business, ILR possible after 3 years if business hits milestones reviewed at 12 and 24 months
+- Skilled Worker Visa: requires employer sponsorship, status depends entirely on that employer, cannot freelance or run a business, must update visa with every job change
+- Global Talent Visa: no sponsor needed, work for anyone or yourself, but must stay active in your endorsed professional field when extending or settling
+- Innovator Founder Visa: must run your own business, locked into one endorsed business idea, mandatory progress reviews at 12 and 24 months, visa can be cut short if milestones not met
 
 Their answers:
-Q1: ${answers.q1}
-Q2: ${answers.q2}
-Q3: ${answers.q3}
-Q4: ${answers.q4}
-Q5: ${answers.q5}
-Q6: ${answers.q6}
+Q1 (Which statement sounds most like you?): ${answers.q1}
+Q2 (Which trade-off feels easier to accept?): ${answers.q2}
+Q3 (Imagine your life in 3 years): ${answers.q3}
+Q4 (What would stress you more?): ${answers.q4}
+Q5 (How would you feel if settlement timeline doubled?): ${answers.q5}
+Q6 (How do you think about financial risk?): ${answers.q6}
 
 Generate a profile in this EXACT JSON format — raw JSON only, no markdown, no backticks:
 {
   "priorities": "3-5 values separated by commas, lowercase",
+  "tradeoffs": "For each visa that does NOT fit this person, write one short paragraph. Always name the visa directly. Structure: '[Visa name] requires [specific restriction]. You value [what their answers show]. That conflict means this route may not suit you.' Only include visas that conflict with their answers. If all three conflict, include all three. If only one conflicts, include only one. Keep each paragraph to 2 sentences maximum. Separate paragraphs with a blank line.",
   "routes": ["Route Name"],
-  "tradeoffs": "1-2 sentences on trade-offs they seem least comfortable with. Second person, honest.",
   "question": "One sharp question for them to sit with. Specific to their answers. 15-25 words max."
 }
 
-Rules: routes from Skilled Worker Visa / Global Talent Visa / Innovator Founder Visa only. 1 or 2 routes max.`;
+Rules:
+- routes must be from: Skilled Worker Visa, Global Talent Visa, Innovator Founder Visa
+- 1 or 2 routes max in routes array
+- tradeoffs must name visas directly, never refer to them as 'this route' or 'that path'
+- tradeoffs must be simple and concrete, not abstract
+- closing question must feel personal to these specific answers`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
