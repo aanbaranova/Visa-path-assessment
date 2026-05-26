@@ -519,8 +519,9 @@ async function submit() {
     if (p.error) throw new Error(p.error);
 
     const priWords = p.priorities.split(',').map(w => w.trim());
-    const priHtml = priWords.map((w,i) =>
-      i < priWords.length-1 ? w+',' : 'and '+w+'.'
+    const priCapitalised = priWords.map((w, i) => i === 0 ? w.charAt(0).toUpperCase() + w.slice(1) : w);
+    const priHtml = priCapitalised.map((w,i) =>
+      i < priCapitalised.length-1 ? w+',' : 'and '+w+'.'
     ).join(' ');
 
     const routeReasonsArr = Array.isArray(p.route_reasons) ? p.route_reasons : (p.route_reasons ? [p.route_reasons] : []);
