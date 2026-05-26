@@ -63,6 +63,7 @@ CRITICAL RULES:
 - routes array: choose only from Skilled Worker Visa, Global Talent Visa, Innovator Founder Visa. Maximum 2 routes.
 - Global Talent Visa does NOT conflict with wanting stable employment at one company — it is fully compatible with full-time employment. Only flag it as a conflict if the person specifically needs to work outside their endorsed field.
 - Skilled Worker Visa DOES conflict with wanting freelancing, multiple income streams, or running a business.
+- When someone wants stable employment at one company, recommend BOTH Skilled Worker Visa AND Global Talent Visa. They serve the same career goal but with a critical difference: Skilled Worker ties status to the employer, Global Talent does not. Always surface this distinction in route_reasons.
 - Never start any paragraph with a visa name. Always start with 'You'.
 - Use hyphens not em dashes.
 - tradeoffs and route_reasons must be specific to these answers, never generic.`;
