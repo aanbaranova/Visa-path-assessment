@@ -524,11 +524,28 @@ async function submit() {
     ).join('<br>');
 
     const routesHtml = p.routes.map(r => '<div class="r-route-tag">'+r+'</div>').join('');
-    const routeReasonsHtml = p.route_reasons ? '<div class="r-route-reasons">'+p.route_reasons.replace(/\n\n/g, '<br><br>')+'</div>' : '';
 
-   document.getElementById('resultBody').innerHTML =
+    // Who they are paragraph
+    const whoHtml = p.who_they_are || '';
+
+    // Visa conflicts - array of paragraphs
+    const conflictsHtml = Array.isArray(p.visa_conflicts)
+      ? p.visa_conflicts.map(c => '<p>'+c+'</p>').join('<br>')
+      : (p.visa_conflicts || '');
+
+    // Tradeoffs section - combine who_they_are and visa_conflicts
+    const tradeoffsHtml = (whoHtml ? '<p>'+whoHtml+'</p>' : '') +
+      (conflictsHtml ? '<br>' + conflictsHtml : '') ||
+      (p.tradeoffs ? p.tradeoffs.replace(/\n\n/g, '<br><br>') : '');
+
+    // Route reasons - array or string
+    const routeReasonsHtml = Array.isArray(p.route_reasons)
+      ? '<div class="r-route-reasons">'+p.route_reasons.map(r => '<p>'+r+'</p>').join('<br>')+'</div>'
+      : (p.route_reasons ? '<div class="r-route-reasons">'+p.route_reasons.replace(/\n\n/g, '<br><br>')+'</div>' : '');
+
+    document.getElementById('resultBody').innerHTML =
       '<div class="r-section"><div class="r-label">You prioritise</div><div class="r-priorities">'+priHtml+'</div></div>'+
-      '<div class="r-section"><div class="r-label">What this means for you</div><div class="r-tradeoffs">'+p.tradeoffs.replace(/\n\n/g, '<br><br>')+'</div></div>'+
+      '<div class="r-section"><div class="r-label">What this means for you</div><div class="r-tradeoffs">'+tradeoffsHtml+'</div></div>'+
       '<div class="r-section"><div class="r-label">Routes worth exploring</div><div class="r-routes">'+routesHtml+'</div>'+routeReasonsHtml+'</div>';
 
   } catch(e) {
