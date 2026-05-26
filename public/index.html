@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What does your life actually need?</title>
+<title>Are your visa and your life trajectory compatible?</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 
@@ -19,9 +19,23 @@
 
   html, body {
     min-height: 100vh;
-    background: var(--paper);
+    background: #f0ebe0;
     color: var(--ink);
     font-family: 'Libre Baskerville', serif;
+  }
+
+  #bg-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  section, #loading {
+    position: relative;
+    z-index: 1;
   }
 
   section {
@@ -51,19 +65,19 @@
   }
 
   .cover-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(48px, 8vw, 96px);
-    font-weight: 900;
-    line-height: 0.92;
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 400;
+    line-height: 1.15;
     margin-bottom: 48px;
   }
   .cover-title em { font-style: italic; color: var(--gold); }
 
   .cover-sub {
-    font-style: italic;
-    font-size: clamp(16px, 2vw, 21px);
+    font-style: normal;
+    font-size: clamp(14px, 1.6vw, 17px);
     color: var(--muted);
-    line-height: 1.65;
+    line-height: 1.75;
     border-left: 2px solid var(--gold);
     padding-left: 28px;
     margin-bottom: 56px;
@@ -85,7 +99,7 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--paper);
-    background: var(--ink);
+    background: var(--gold);
     border: none;
     padding: 18px 44px;
     cursor: pointer;
@@ -117,12 +131,12 @@
   }
 
   .q-text {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(26px, 4vw, 44px);
-    font-weight: 700;
-    line-height: 1.1;
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(22px, 3.5vw, 36px);
+    font-weight: 400;
+    line-height: 1.2;
     margin-bottom: 48px;
-    max-width: 22ch;
+    max-width: 26ch;
   }
 
   .options { display: flex; flex-direction: column; gap: 14px; margin-bottom: 48px; }
@@ -141,11 +155,11 @@
     transition: border-color 0.15s, background 0.15s;
   }
   .option:hover { border-color: var(--gold); background: rgba(184,134,11,0.04); }
-  .option.sel { border-color: var(--ink); border-width: 2px; }
+  .option.sel { border-color: var(--gold); border-width: 1px; background: rgba(184,134,11,0.04); }
 
   .opt-mark {
     font-family: 'DM Mono', monospace;
-    font-size: 10px;
+    font-size: 8px;
     letter-spacing: 0.1em;
     color: var(--muted);
     margin-top: 3px;
@@ -169,7 +183,7 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--paper);
-    background: var(--ink);
+    background: var(--gold);
     border: none;
     padding: 16px 40px;
     cursor: pointer;
@@ -212,10 +226,12 @@
     50% { transform: scaleY(1); opacity: 1; }
   }
   .loading-text {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: clamp(20px, 3vw, 32px);
+    font-family: 'DM Mono', monospace;
+    font-style: normal;
+    font-size: clamp(14px, 2vw, 18px);
     color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
   }
 
   /* ── RESULT ── */
@@ -235,10 +251,10 @@
   }
 
   .result-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 5vw, 64px);
-    font-weight: 900;
-    line-height: 0.95;
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 400;
+    line-height: 1.2;
     margin-bottom: 64px;
   }
 
@@ -259,12 +275,14 @@
   }
 
   .r-priorities {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(22px, 3vw, 36px);
-    font-weight: 700;
-    line-height: 1.3;
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(18px, 2.2vw, 26px);
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.5;
+    color: var(--ink);
   }
-  .r-priorities em { font-style: italic; color: var(--gold); }
+  .r-priorities em { font-style: normal; color: var(--ink); }
 
   .r-routes { display: flex; flex-wrap: wrap; gap: 12px; }
   .r-route-tag {
@@ -279,10 +297,10 @@
 
   .r-tradeoffs {
     font-family: 'Libre Baskerville', serif;
-    font-style: italic;
-    font-size: clamp(16px, 1.8vw, 20px);
+    font-style: normal;
+    font-size: clamp(15px, 1.8vw, 18px);
     line-height: 1.7;
-    color: var(--muted);
+    color: var(--ink);
   }
 
   .r-question {
@@ -317,24 +335,36 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
+  .cover-footer {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 48px;
+  }
+
   .hidden { display: none; }
 </style>
 </head>
 <body>
+<canvas id="bg-canvas"></canvas>
 
 <!-- COVER -->
 <section id="cover" class="fade">
-  <div class="eyebrow">Immigration Motivation Assessment</div>
   <h1 class="cover-title">
-    What does your life<br>
-    <em>actually</em><br>
-    need?
+    Are your visa and your<br>
+    life trajectory<br>
+    <em>compatible?</em>
   </h1>
   <p class="cover-sub">
-    This isn't about which visa you qualify for. It's about which path fits the life you're trying to build.
+    This assessment is about fit, not eligibility.<br><br>
+    It's designed to help you understand which visa route aligns with your career priorities and the life you want to build before you invest time and energy moving in the wrong direction.<br><br>
+    It is not immigration advice. For immigration advice specific to your situation, consult a regulated immigration professional.
   </p>
   <div class="meta">6 questions &nbsp;·&nbsp; 3 minutes &nbsp;·&nbsp; free</div>
-  <button class="btn-primary" onclick="startQuiz()">Begin →</button>
+  <button class="btn-primary" onclick="startQuiz()">Begin</button>
+  <div class="cover-footer">Built by Anna Baranova &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/anna-baranova-044a84224" target="_blank" style="color:var(--gold);text-decoration:none;">LinkedIn</a></div>
 </section>
 
 <!-- QUIZ -->
@@ -349,13 +379,13 @@
 <!-- LOADING -->
 <div id="loading" style="display:none; min-height:100vh; align-items:center; justify-content:center; flex-direction:column; gap:32px;">
   <div class="loading-rule"></div>
-  <div class="loading-text">Reading your answers…</div>
+  <div class="loading-text">Mapping your priorities...</div>
 </div>
 
 <!-- RESULT -->
 <section id="result" class="hidden">
   <div class="result-label">Your profile</div>
-  <h2 class="result-title">Here's what<br>your answers reveal.</h2>
+  <h2 class="result-title">Here's what your answers reveal</h2>
   <div id="resultBody"></div>
   <button class="btn-restart" onclick="restart()">Start again</button>
 </section>
@@ -363,12 +393,12 @@
 <script>
 const Qs = [
   {
-    text: "Which statement sounds most like you?",
+    text: "When it comes to your career, which sounds most like you?",
     opts: [
       "I'm comfortable building my career inside one company",
       "I want flexibility to change employers freely",
       "I want multiple income streams",
-      "I eventually want to freelance or consult",
+      "I want to freelance or consult",
       "I want to build my own business"
     ]
   },
@@ -381,18 +411,18 @@ const Qs = [
     ]
   },
   {
-    text: "Imagine your life in 3 years. What sounds closest?",
+    text: "Would you make different career choices if your immigration status wasn't a factor?",
     opts: [
-      "Stable employment with clear progression at one company",
-      "A portfolio career across different projects and clients",
-      "Running my own business",
-      "Flexibility to pivot whenever opportunities appear"
+      "Yes, I'm holding back because of visa constraints",
+      "Somewhat, it influences some decisions",
+      "Not really, I'd make the same choices regardless",
+      "I haven't thought about it that way before"
     ]
   },
   {
     text: "What would stress you more?",
     opts: [
-      "Losing my job and my immigration status at the same time",
+      "Having my immigration status tied to my employment",
       "Being unable to pivot professionally or change direction",
       "Business uncertainty and inconsistent income",
       "Feeling tied to one professional field"
@@ -401,15 +431,15 @@ const Qs = [
   {
     text: "How would you feel if your settlement timeline doubled because the rules changed?",
     opts: [
-      "It would seriously affect my plans — speed matters to me",
+      "It would seriously affect my plans - speed matters to me",
       "Frustrating, but I'd adapt",
       "Settlement speed isn't my main priority"
     ]
   },
   {
-    text: "How do you think about financial risk?",
+    text: "How comfortable are you with financial uncertainty?",
     opts: [
-      "I need a predictable salary — uncertainty affects me significantly",
+      "I need a predictable salary - uncertainty affects me significantly",
       "I can handle some uncertainty but need a baseline income I can rely on",
       "I'm comfortable with variable income if I have control over it",
       "I'd rather take the financial risk than depend on someone else"
@@ -488,9 +518,8 @@ async function submit() {
 
    document.getElementById('resultBody').innerHTML =
       '<div class="r-section"><div class="r-label">You prioritise</div><div class="r-priorities">'+priHtml+'</div></div>'+
-      '<div class="r-section"><div class="r-label">The trade-offs you seem less comfortable with</div><div class="r-tradeoffs">'+p.tradeoffs+'</div></div>'+
-      '<div class="r-section"><div class="r-label">Routes worth exploring</div><div class="r-routes">'+routesHtml+'</div></div>'+
-      '<div class="r-section"><div class="r-label">The question to sit with</div><div class="r-question">\u201c'+p.question+'\u201d</div></div>';
+      '<div class="r-section"><div class="r-label">What this means for you</div><div class="r-tradeoffs">'+p.tradeoffs+'</div></div>'+
+      '<div class="r-section"><div class="r-label">Routes worth exploring</div><div class="r-routes">'+routesHtml+'</div></div>';
 
   } catch(e) {
     document.getElementById('resultBody').innerHTML =
@@ -516,6 +545,81 @@ function show(id) {
 function hide(id) {
   document.getElementById(id).classList.add('hidden');
 }
+</script>
+<script>
+const bgCanvas = document.getElementById('bg-canvas');
+const bgCtx = bgCanvas.getContext('2d');
+
+function bgResize() {
+  bgCanvas.width = window.innerWidth;
+  bgCanvas.height = window.innerHeight;
+  bgDraw();
+}
+
+function bgDraw() {
+  const W = bgCanvas.width;
+  const H = bgCanvas.height;
+  bgCtx.clearRect(0, 0, W, H);
+
+  const base = bgCtx.createLinearGradient(0, 0, W, H);
+  base.addColorStop(0, '#f5f0e6');
+  base.addColorStop(0.5, '#ede5d5');
+  base.addColorStop(1, '#e8dfc8');
+  bgCtx.fillStyle = base;
+  bgCtx.fillRect(0, 0, W, H);
+
+  bgBloom(W * 0.85, H * 0.08, 380, 'rgba(210,170,80,0.28)', 'rgba(220,185,100,0.0)');
+  bgBloom(W * 0.08, H * 0.88, 340, 'rgba(160,185,140,0.26)', 'rgba(160,185,140,0.0)');
+  bgBloom(W * 0.78, H * 0.65, 280, 'rgba(195,155,90,0.22)', 'rgba(195,155,90,0.0)');
+  bgBloom(W * 0.12, H * 0.18, 200, 'rgba(175,195,155,0.20)', 'rgba(175,195,155,0.0)');
+
+  bgStem(W*0.82, H*0.0, W*0.78, H*0.35, 'rgba(180,140,60,0.18)', 18, -25);
+  bgStem(W*0.88, H*0.0, W*0.84, H*0.30, 'rgba(160,125,50,0.14)', 14, 15);
+  bgStem(W*0.92, H*0.0, W*0.89, H*0.28, 'rgba(200,160,70,0.12)', 10, -10);
+  bgStem(W*0.05, H*1.0, W*0.10, H*0.62, 'rgba(140,165,115,0.18)', 16, 20);
+  bgStem(W*0.10, H*1.0, W*0.14, H*0.65, 'rgba(120,148,100,0.14)', 12, -15);
+  bgStem(W*0.02, H*1.0, W*0.07, H*0.68, 'rgba(155,178,130,0.12)', 10, 8);
+  bgStem(W*0.95, H*1.0, W*0.90, H*0.60, 'rgba(175,138,60,0.15)', 14, -20);
+  bgStem(W*0.99, H*1.0, W*0.94, H*0.64, 'rgba(160,125,50,0.11)', 10, 12);
+
+  const veil = bgCtx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.max(W,H)*0.7);
+  veil.addColorStop(0, 'rgba(245,240,228,0.0)');
+  veil.addColorStop(1, 'rgba(232,224,208,0.35)');
+  bgCtx.fillStyle = veil;
+  bgCtx.fillRect(0, 0, W, H);
+}
+
+function bgBloom(x, y, r, colorInner, colorOuter) {
+  const g = bgCtx.createRadialGradient(x, y, 0, x, y, r);
+  g.addColorStop(0, colorInner);
+  g.addColorStop(0.5, colorInner.replace(/[\d.]+\)$/, '0.08)'));
+  g.addColorStop(1, colorOuter);
+  bgCtx.save();
+  bgCtx.filter = 'blur(32px)';
+  bgCtx.fillStyle = g;
+  bgCtx.beginPath();
+  bgCtx.ellipse(x, y, r, r * 0.85, 0, 0, Math.PI * 2);
+  bgCtx.fill();
+  bgCtx.restore();
+}
+
+function bgStem(x1, y1, x2, y2, color, width, angle) {
+  bgCtx.save();
+  bgCtx.filter = 'blur(12px)';
+  bgCtx.strokeStyle = color;
+  bgCtx.lineWidth = width;
+  bgCtx.lineCap = 'round';
+  const cx = (x1+x2)/2 + Math.cos(angle*Math.PI/180)*60;
+  const cy = (y1+y2)/2 + Math.sin(angle*Math.PI/180)*60;
+  bgCtx.beginPath();
+  bgCtx.moveTo(x1, y1);
+  bgCtx.quadraticCurveTo(cx, cy, x2, y2);
+  bgCtx.stroke();
+  bgCtx.restore();
+}
+
+window.addEventListener('resize', bgResize);
+bgResize();
 </script>
 </body>
 </html>
