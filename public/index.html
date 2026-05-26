@@ -284,11 +284,6 @@
   }
   .r-priorities em { font-style: normal; color: var(--ink); }
 
-  .r-route-tag--conflict {
-    border-color: var(--muted);
-    color: var(--muted);
-  }
-
   .r-routes { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
 
   .r-route-reasons {
@@ -528,29 +523,28 @@ async function submit() {
       i < priWords.length-1 ? w+',' : 'and '+w+'.'
     ).join(' ');
 
-    const routesHtml = p.routes.map(r => '<div class="r-route-tag">'+r+'</div>').join('');
+    const routeReasonsArr = Array.isArray(p.route_reasons) ? p.route_reasons : (p.route_reasons ? [p.route_reasons] : []);
+
+    const routesHtml = p.routes.map((r, i) => {
+      const reason = routeReasonsArr[i] || '';
+      return '<div style="margin-bottom:24px;"><div class="r-route-tag" style="display:inline-block;">'+r+'</div>'+(reason ? '<p style="margin-top:14px;font-family:\'Libre Baskerville\',serif;font-size:clamp(14px,1.6vw,17px);line-height:1.75;color:#0d0c0a;">'+reason+'</p>' : '')+'</div>';
+    }).join('');
 
     const whoHtml = p.who_they_are ? '<p>'+p.who_they_are+'</p>' : '';
 
-    const routeReasonsHtml = Array.isArray(p.route_reasons)
-      ? p.route_reasons.map(r => '<p>'+r+'</p>').join('<br>')
-      : (p.route_reasons || '');
-
     const conflictsHtml = Array.isArray(p.visa_conflicts)
       ? p.visa_conflicts.map(c => {
-          // Each conflict starts with "You..." - extract visa name from the text
-          // Format from prompt: "You [value]. [Visa Name] [conflict]. That makes..."
           const visaMatch = c.match(/(Skilled Worker Visa|Global Talent Visa|Innovator Founder Visa)/);
-          const visaTag = visaMatch ? '<div class="r-route-tag r-route-tag--conflict">'+visaMatch[1]+'</div>' : '';
-          return '<div style="margin-bottom:16px;">'+visaTag+'<p style="margin-top:12px;">'+c+'</p></div>';
+          const visaTag = visaMatch ? '<div class="r-route-tag r-route-tag--conflict" style="display:inline-block;">'+visaMatch[1]+'</div>' : '';
+          return '<div style="margin-bottom:24px;">'+visaTag+'<p style="margin-top:14px;font-family:\'Libre Baskerville\',serif;font-size:clamp(14px,1.6vw,17px);line-height:1.75;color:#0d0c0a;">'+c+'</p></div>';
         }).join('')
       : (p.visa_conflicts || '');
 
     document.getElementById('resultBody').innerHTML =
       '<div class="r-section"><div class="r-label">You prioritise</div><div class="r-priorities">'+priHtml+'</div></div>'+
       '<div class="r-section"><div class="r-label">What this means for you</div><div class="r-tradeoffs">'+whoHtml+'</div></div>'+
-      '<div class="r-section"><div class="r-label">Routes worth exploring</div><div class="r-routes">'+routesHtml+'</div><div class="r-route-reasons">'+routeReasonsHtml+'</div></div>'+
-      (conflictsHtml ? '<div class="r-section"><div class="r-label">Routes that don\u2019t fit your priorities</div><div class="r-tradeoffs">'+conflictsHtml+'</div></div>' : '');
+      '<div class="r-section"><div class="r-label">Routes worth exploring</div>'+routesHtml+'</div>'+
+      (conflictsHtml ? '<div class="r-section"><div class="r-label">Routes that don\u2019t fit your priorities</div>'+conflictsHtml+'</div>' : '');
 
   } catch(e) {
     document.getElementById('resultBody').innerHTML =
