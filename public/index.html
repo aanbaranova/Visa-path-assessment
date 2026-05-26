@@ -404,7 +404,7 @@ const Qs = [
   {
     text: "When it comes to your career, which sounds most like you?",
     opts: [
-      "I'm comfortable building my career inside one company",
+      "I\u2019m comfortable building my career inside one company",
       "I want flexibility to change employers freely",
       "I want multiple income streams",
       "I want to freelance or consult",
@@ -422,10 +422,10 @@ const Qs = [
   {
     text: "Would you make different career choices if your immigration status wasn't a factor?",
     opts: [
-      "Yes, I'm holding back because of visa constraints",
+      "Yes, I\u2019m holding back because of visa constraints",
       "Somewhat, it influences some decisions",
-      "Not really, I'd make the same choices regardless",
-      "I haven't thought about it that way before"
+      "Not really, I\u2019d make the same choices regardless",
+      "I haven\u2019t thought about it that way before"
     ]
   },
   {
@@ -441,8 +441,8 @@ const Qs = [
     text: "How would you feel if your settlement timeline doubled because the rules changed?",
     opts: [
       "It would seriously affect my plans - speed matters to me",
-      "Frustrating, but I'd adapt",
-      "Settlement speed isn't my main priority"
+      "Frustrating, but I\u2019d adapt",
+      "Settlement speed isn\u2019t my main priority"
     ]
   },
   {
@@ -450,8 +450,8 @@ const Qs = [
     opts: [
       "I need a predictable salary - uncertainty affects me significantly",
       "I can handle some uncertainty but need a baseline income I can rely on",
-      "I'm comfortable with variable income if I have control over it",
-      "I'd rather take the financial risk than depend on someone else"
+      "I\u2019m comfortable with variable income if I have control over it",
+      "I\u2019d rather take the financial risk than depend on someone else"
     ]
   }
 ];
@@ -520,33 +520,26 @@ async function submit() {
 
     const priWords = p.priorities.split(',').map(w => w.trim());
     const priHtml = priWords.map((w,i) =>
-      i < priWords.length-1 ? '<em>'+w+'</em>,' : 'and <em>'+w+'.</em>'
-    ).join('<br>');
+      i < priWords.length-1 ? w+',' : 'and '+w+'.'
+    ).join(' ');
 
     const routesHtml = p.routes.map(r => '<div class="r-route-tag">'+r+'</div>').join('');
 
-    // Who they are paragraph
-    const whoHtml = p.who_they_are || '';
+    const whoHtml = p.who_they_are ? '<p>'+p.who_they_are+'</p>' : '';
 
-    // Visa conflicts - array of paragraphs
+    const routeReasonsHtml = Array.isArray(p.route_reasons)
+      ? p.route_reasons.map(r => '<p>'+r+'</p>').join('<br>')
+      : (p.route_reasons || '');
+
     const conflictsHtml = Array.isArray(p.visa_conflicts)
       ? p.visa_conflicts.map(c => '<p>'+c+'</p>').join('<br>')
       : (p.visa_conflicts || '');
 
-    // Tradeoffs section - combine who_they_are and visa_conflicts
-    const tradeoffsHtml = (whoHtml ? '<p>'+whoHtml+'</p>' : '') +
-      (conflictsHtml ? '<br>' + conflictsHtml : '') ||
-      (p.tradeoffs ? p.tradeoffs.replace(/\n\n/g, '<br><br>') : '');
-
-    // Route reasons - array or string
-    const routeReasonsHtml = Array.isArray(p.route_reasons)
-      ? '<div class="r-route-reasons">'+p.route_reasons.map(r => '<p>'+r+'</p>').join('<br>')+'</div>'
-      : (p.route_reasons ? '<div class="r-route-reasons">'+p.route_reasons.replace(/\n\n/g, '<br><br>')+'</div>' : '');
-
     document.getElementById('resultBody').innerHTML =
       '<div class="r-section"><div class="r-label">You prioritise</div><div class="r-priorities">'+priHtml+'</div></div>'+
-      '<div class="r-section"><div class="r-label">What this means for you</div><div class="r-tradeoffs">'+tradeoffsHtml+'</div></div>'+
-      '<div class="r-section"><div class="r-label">Routes worth exploring</div><div class="r-routes">'+routesHtml+'</div>'+routeReasonsHtml+'</div>';
+      '<div class="r-section"><div class="r-label">What this means for you</div><div class="r-tradeoffs">'+whoHtml+'</div></div>'+
+      '<div class="r-section"><div class="r-label">Routes worth exploring</div><div class="r-routes">'+routesHtml+'</div><div class="r-route-reasons">'+routeReasonsHtml+'</div></div>'+
+      (conflictsHtml ? '<div class="r-section"><div class="r-label">Routes that don\u2019t fit your priorities</div><div class="r-tradeoffs">'+conflictsHtml+'</div></div>' : '');
 
   } catch(e) {
     document.getElementById('resultBody').innerHTML =
