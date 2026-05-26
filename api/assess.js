@@ -50,22 +50,23 @@ Q4 (What would stress you more?): ${answers.q4}
 Q5 (How would you feel if your settlement timeline doubled?): ${answers.q5}
 Q6 (How comfortable are you with financial uncertainty?): ${answers.q6}
 
-Generate a profile in this EXACT JSON format. Raw JSON only, no markdown, no backticks. All string values must be valid JSON - no unescaped newlines inside strings.
+Generate a profile in this EXACT JSON format. Raw JSON only, no markdown, no backticks. All string values must be valid JSON with no unescaped newlines.
 
 {
   "priorities": "3-5 values separated by commas, lowercase",
-  "who_they_are": "1 paragraph, 3-4 sentences. Describe what this person values based on ALL answers. Cover career direction, financial approach, relationship with visa status, settlement priorities. Do NOT mention any visa. Second person.",
-  "visa_conflicts": "One sentence per conflicting visa only, each separated by a double pipe ||. Format each as: You [what they value]. [Visa name] [specific conflict]. That makes this route a poor fit. Only include visas that truly conflict. Never start with a visa name.",
+  "who_they_are": "1 paragraph, 3-4 sentences. Who this person is based on ALL their answers. Cover career direction, financial approach, relationship with visa status, settlement priorities. Do NOT mention any visa. Second person. No apostrophes - use full words instead (e.g. you are instead of you're, do not instead of don't).",
   "routes": ["Route Name"],
-  "route_reasons": "One paragraph per recommended route, separated by a double pipe ||. 2-3 sentences each. Explain specifically why it fits using their actual answers. Start with You."
+  "route_reasons": "One paragraph per recommended route separated by ||. 2-3 sentences each explaining specifically why it fits their answers. Start each with You. No apostrophes.",
+  "visa_conflicts": "One paragraph per conflicting visa separated by ||. 2-3 sentences each. First sentence: what the person values or needs. Second sentence: the specific visa restriction that conflicts. Third sentence: That makes this route a poor fit. Never start with a visa name - always start with You. No apostrophes."
 }
 
 CRITICAL RULES:
 - Maximum 2 routes
-- When someone wants stable employment at one company, recommend BOTH Skilled Worker Visa AND Global Talent Visa - same career goal, but Global Talent does not tie status to employer
+- When someone wants stable employment at one company, recommend BOTH Skilled Worker Visa AND Global Talent Visa - same career goal but Global Talent does not tie status to employer
 - Global Talent only conflicts if person needs to work outside their endorsed field
-- Never start any paragraph with a visa name
-- Use hyphens not em dashes`;
+- Never start any paragraph with a visa name - always start with You
+- Use hyphens not em dashes
+- No apostrophes anywhere in the output - rephrase to avoid them`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -94,18 +95,24 @@ CRITICAL RULES:
     try {
       parsed = JSON.parse(clean);
     } catch (parseError) {
-      // Try to fix common JSON issues - replace literal newlines in strings
       const fixed = clean.replace(/\n/g, ' ').replace(/\r/g, '');
       parsed = JSON.parse(fixed);
     }
 
-    // Convert pipe-separated fields to arrays for the frontend
+    // Convert pipe-separated fields to arrays
     if (parsed.visa_conflicts) {
       parsed.visa_conflicts = parsed.visa_conflicts.split('||').map(s => s.trim()).filter(Boolean);
     }
     if (parsed.route_reasons) {
       parsed.route_reasons = parsed.route_reasons.split('||').map(s => s.trim()).filter(Boolean);
     }
+
+    // Replace straight apostrophes with smart ones in all string fields
+    const smartify = str => str.replace(/'/g, '\u2019');
+    if (parsed.priorities) parsed.priorities = smartify(parsed.priorities);
+    if (parsed.who_they_are) parsed.who_they_are = smartify(parsed.who_they_are);
+    if (parsed.visa_conflicts) parsed.visa_conflicts = parsed.visa_conflicts.map(smartify);
+    if (parsed.route_reasons) parsed.route_reasons = parsed.route_reasons.map(smartify);
 
     res.status(200).json(parsed);
 
