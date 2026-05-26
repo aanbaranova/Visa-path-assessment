@@ -284,6 +284,11 @@
   }
   .r-priorities em { font-style: normal; color: var(--ink); }
 
+  .r-route-tag--conflict {
+    border-color: var(--muted);
+    color: var(--muted);
+  }
+
   .r-routes { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
 
   .r-route-reasons {
@@ -532,7 +537,13 @@ async function submit() {
       : (p.route_reasons || '');
 
     const conflictsHtml = Array.isArray(p.visa_conflicts)
-      ? p.visa_conflicts.map(c => '<p>'+c+'</p>').join('<br>')
+      ? p.visa_conflicts.map(c => {
+          // Each conflict starts with "You..." - extract visa name from the text
+          // Format from prompt: "You [value]. [Visa Name] [conflict]. That makes..."
+          const visaMatch = c.match(/(Skilled Worker Visa|Global Talent Visa|Innovator Founder Visa)/);
+          const visaTag = visaMatch ? '<div class="r-route-tag r-route-tag--conflict">'+visaMatch[1]+'</div>' : '';
+          return '<div style="margin-bottom:16px;">'+visaTag+'<p style="margin-top:12px;">'+c+'</p></div>';
+        }).join('')
       : (p.visa_conflicts || '');
 
     document.getElementById('resultBody').innerHTML =
