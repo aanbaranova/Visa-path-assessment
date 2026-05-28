@@ -62,9 +62,10 @@ Generate a profile in this EXACT JSON format. Raw JSON only, no markdown, no bac
 
 CRITICAL RULES:
 - Maximum 2 routes
-- When someone wants stable employment at one company, recommend BOTH Skilled Worker Visa AND Global Talent Visa - same career goal but Global Talent does not tie status to employer
-- When someone wants to run their own business or freelance AND their work is likely in their professional field, recommend BOTH Global Talent Visa AND Innovator Founder Visa. In route_reasons for Global Talent, always note that it works as long as the business remains in their endorsed professional field.
-- When someone wants to run a business or work that is clearly outside their current professional field, recommend ONLY Innovator Founder Visa and flag Global Talent as a conflict explaining the endorsed field restriction.
+- When someone wants to freelance or consult, recommend Global Talent Visa only. Do NOT recommend Innovator Founder Visa - freelancing and consulting are not the same as building an endorsed business with milestone accountability.
+- When someone explicitly wants to build and run their own business (not freelance or consult), recommend BOTH Global Talent Visa AND Innovator Founder Visa. In route_reasons for Global Talent, always note it works as long as the business stays in their endorsed professional field. In route_reasons for Innovator Founder, note the milestone accountability structure.
+- When someone wants stable employment at one company, recommend BOTH Skilled Worker Visa AND Global Talent Visa - same career goal but Global Talent does not tie status to employer.
+- When someone wants to work outside their endorsed professional field, recommend ONLY Innovator Founder Visa and flag Global Talent as a conflict.
 - Global Talent ONLY conflicts if the person wants to work primarily outside their endorsed professional field. It does NOT conflict with entrepreneurship or freelancing within their field.
 - Innovator Founder conflicts if someone wants stable employment, needs predictable income, or does not want to be accountable to an endorsing body with milestone reviews.
 - Skilled Worker conflicts if someone wants freelancing, multiple income streams, or their own business.
