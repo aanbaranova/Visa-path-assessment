@@ -28,10 +28,10 @@ GLOBAL TALENT VISA:
 - No employer sponsor needed
 - You CAN work as a full-time employee at one company - does NOT require freelancing or self-employment
 - You can also freelance, consult, have multiple income streams, or run a business
-- Key restriction: when extending or applying for ILR, must show work in endorsed professional field. Does not need to be self-employed - just active in their field.
+- Key restriction: when extending or applying for ILR, must show earnings and work in your endorsed professional field. If your business or work is in your endorsed field, this is not a problem. If you want to work primarily outside your endorsed field, this is a conflict.
 - ILR after 3 years (research/academia) or 5 years (other fields)
-- FITS: people who want freedom to work however they choose, employed or self-employed, in their field
-- CONFLICTS: people who need to work entirely outside their endorsed field
+- FITS: people who want freedom to work however they choose - employed, freelance, or running a business - as long as that work is in their endorsed professional field
+- CONFLICTS: people who want to work primarily outside their endorsed professional field
 
 INNOVATOR FOUNDER VISA:
 - Must run own business - employment as primary activity not permitted
@@ -63,7 +63,11 @@ Generate a profile in this EXACT JSON format. Raw JSON only, no markdown, no bac
 CRITICAL RULES:
 - Maximum 2 routes
 - When someone wants stable employment at one company, recommend BOTH Skilled Worker Visa AND Global Talent Visa - same career goal but Global Talent does not tie status to employer
-- Global Talent only conflicts if person needs to work outside their endorsed field
+- When someone wants to run their own business or freelance AND their work is likely in their professional field, recommend BOTH Global Talent Visa AND Innovator Founder Visa. In route_reasons for Global Talent, always note that it works as long as the business remains in their endorsed professional field.
+- When someone wants to run a business or work that is clearly outside their current professional field, recommend ONLY Innovator Founder Visa and flag Global Talent as a conflict explaining the endorsed field restriction.
+- Global Talent ONLY conflicts if the person wants to work primarily outside their endorsed professional field. It does NOT conflict with entrepreneurship or freelancing within their field.
+- Innovator Founder conflicts if someone wants stable employment, needs predictable income, or does not want to be accountable to an endorsing body with milestone reviews.
+- Skilled Worker conflicts if someone wants freelancing, multiple income streams, or their own business.
 - Never start any paragraph with a visa name - always start with You
 - Use hyphens not em dashes
 - No apostrophes anywhere in the output - rephrase to avoid them
