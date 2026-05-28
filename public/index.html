@@ -535,8 +535,15 @@ async function submit() {
 
     const conflictsHtml = Array.isArray(p.visa_conflicts)
       ? p.visa_conflicts.map(c => {
-          const visaMatch = c.match(/(Skilled Worker Visa|Global Talent Visa|Innovator Founder Visa)/);
-          const visaTag = visaMatch ? '<div class="r-route-tag r-route-tag--conflict" style="display:inline-block;">'+visaMatch[1]+'</div>' : '';
+          const visaMatch = c.match(/(Skilled Worker(?:\s*Visa)?|Global Talent(?:\s*Visa)?|Innovator Founder(?:\s*Visa)?)/i);
+          let visaName = '';
+          if (visaMatch) {
+            const v = visaMatch[1].toLowerCase();
+            if (v.includes('skilled')) visaName = 'Skilled Worker Visa';
+            else if (v.includes('global')) visaName = 'Global Talent Visa';
+            else if (v.includes('innovator')) visaName = 'Innovator Founder Visa';
+          }
+          const visaTag = visaName ? '<div class="r-route-tag r-route-tag--conflict" style="display:inline-block;">'+visaName+'</div>' : '';
           return '<div style="margin-bottom:24px;">'+visaTag+'<p style="margin-top:14px;font-family:\'Libre Baskerville\',serif;font-size:clamp(14px,1.6vw,17px);line-height:1.75;color:#0d0c0a;">'+c+'</p></div>';
         }).join('')
       : (p.visa_conflicts || '');
