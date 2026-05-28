@@ -16,13 +16,13 @@ THE THREE ROUTES:
 
 SKILLED WORKER VISA:
 - Requires a licensed employer to sponsor you
-- Immigration status tied directly to that employer - lose your job, lose your status
-- Cannot freelance, consult, or run your own business on the side
-- Every job change requires a new visa application
+- Immigration status is directly tied to that employer - if employment ends, your status becomes precarious and you need to act quickly to secure a new sponsor or resolve your situation
+- Side work is restricted - you cannot freely freelance, consult, or run your own business as a primary income source alongside your sponsored role
+- Every job change requires a new visa application and your new employer must be a licensed sponsor
 - You CAN be employed stably at one company for years - this is the most common use case
 - ILR after 5 years (government has proposed extending to 10 years)
 - FITS: people who want stable employment and are comfortable with employer dependency
-- CONFLICTS: people who want flexibility, multiple income streams, freelancing, or their own business
+- CONFLICTS: people who want career flexibility, multiple income streams, freelancing, or their own business
 
 GLOBAL TALENT VISA:
 - No employer sponsor needed
@@ -57,7 +57,7 @@ Generate a profile in this EXACT JSON format. Raw JSON only, no markdown, no bac
   "who_they_are": "1 paragraph, 3-4 sentences. Who this person is based on ALL their answers. Cover career direction, financial approach, relationship with visa status, settlement priorities. Do NOT mention any visa. Second person. No apostrophes - use full words instead (e.g. you are instead of you're, do not instead of don't).",
   "routes": ["Route Name"],
   "route_reasons": "One paragraph per recommended route separated by ||. 2-3 sentences each explaining specifically why it fits their answers. Start each with You. No apostrophes.",
-  "visa_conflicts": "One paragraph per conflicting visa separated by ||. 2-3 sentences each. First sentence: what the person values or needs. Second sentence: the specific visa restriction that conflicts. Third sentence: That makes this route a poor fit. Never start with a visa name - always start with You. No apostrophes."
+  "visa_conflicts": "One paragraph per conflicting visa separated by ||. 2-3 sentences each. First sentence: what the person values or needs. Second sentence: the specific visa restriction that conflicts - be precise and accurate, do not overstate restrictions. Third sentence: That makes this route a poor fit. Never start with a visa name - always start with You. No apostrophes."
 }
 
 CRITICAL RULES:
@@ -66,7 +66,8 @@ CRITICAL RULES:
 - Global Talent only conflicts if person needs to work outside their endorsed field
 - Never start any paragraph with a visa name - always start with You
 - Use hyphens not em dashes
-- No apostrophes anywhere in the output - rephrase to avoid them`;
+- No apostrophes anywhere in the output - rephrase to avoid them
+- For Skilled Worker Visa conflicts: say side work is restricted, not prohibited. Say status becomes precarious if employment ends, not that status is lost immediately.`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
