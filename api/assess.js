@@ -69,6 +69,7 @@ CRITICAL RULES:
 - Global Talent ONLY conflicts if the person wants to work primarily outside their endorsed professional field. It does NOT conflict with entrepreneurship or freelancing within their field.
 - Innovator Founder conflicts if someone wants stable employment, needs predictable income, or does not want to be accountable to an endorsing body with milestone reviews.
 - Skilled Worker conflicts if someone wants freelancing, multiple income streams, or their own business.
+- When describing Global Talent Visa benefits, never frame it as "you do not have to freelance" or "without any requirement to freelance" - no visa requires freelancing. Instead frame it positively: you can work as an employee, freelance, consult, or run a business - the choice is yours.
 - Always use the exact visa names: Skilled Worker Visa, Global Talent Visa, Innovator Founder Visa. Never shorten to "Skilled Worker route", "Global Talent route", etc.
 - Never start any paragraph with a visa name - always start with You
 - Use hyphens not em dashes
