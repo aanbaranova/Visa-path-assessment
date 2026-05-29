@@ -29,7 +29,7 @@ GLOBAL TALENT VISA:
 - CAN work as a full-time employee at one company - does NOT require freelancing or self-employment
 - Can also freelance, consult, have multiple income streams, or run a business
 - Key restriction: when extending or applying for ILR, must show earnings and work in endorsed professional field
-- ILR after 3 years (research/academia) or 5 years (other fields)
+- ILR after 3 or 5 years depending on your endorsement type
 - FITS: people who want freedom to work however they choose in their endorsed field - employed, freelance, or running a business
 - CONFLICTS: people who want to work primarily outside their endorsed professional field
 
@@ -38,6 +38,7 @@ INNOVATOR FOUNDER VISA:
 - Locked into one endorsed business idea - major changes require re-endorsement
 - Mandatory progress reviews at 12 and 24 months
 - Visa can be cut short if endorsement withdrawn
+- Supplementary employment is allowed but only in skilled roles (Level 3 qualification minimum) and must remain secondary to the business - you cannot pivot to employment as your main activity
 - ILR after 3 years if milestones met
 - FITS: people who want to build their own business, can accept financial uncertainty, and are comfortable with milestone accountability
 - CONFLICTS: people who want stable employment, need predictable income, or do not want to be tied to one business idea with mandatory reviews
@@ -72,11 +73,12 @@ CRITICAL RULES:
 - Innovator Founder conflicts if someone wants stable employment, needs predictable income, or does not want milestone accountability.
 - Skilled Worker conflicts if someone wants freelancing, multiple income streams, or their own business.
 - When Q4 answer is "Feeling tied to one professional field" and Global Talent is recommended: dedicate a full sentence in route_reasons to the endorsed field restriction tension.
-- Global Talent settlement timeline: always say "3 or 5 years depending on your field" - never a flat 5 years.
+- Global Talent settlement timeline: always say "3 or 5 years depending on your endorsement type" - never a flat 5 years and never attribute the timeline to field alone.
 - Never frame Global Talent as "you do not have to freelance" - frame positively.
 - Always use exact visa names: Skilled Worker Visa, Global Talent Visa, Innovator Founder Visa.
 - Never start any paragraph with a visa name - always start with You.
 - Use hyphens not em dashes.
+- For Innovator Founder conflicts: never say employment is completely prohibited. Say supplementary employment is limited to skilled roles and must remain secondary to the business - it cannot become the primary activity.
 - For Skilled Worker conflicts: say side work is restricted not prohibited. Say status becomes precarious if employment ends, not lost immediately.`;
 
   try {
