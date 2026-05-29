@@ -12,7 +12,7 @@
   :root {
     --ink: #0d0c0a;
     --paper: #f5f0e8;
-    --gold: #b8860b;
+    --gold: #9e5a3a;
     --muted: #7a7268;
     --rule: #ddd5c8;
   }
@@ -70,8 +70,9 @@
     font-weight: 400;
     line-height: 1.15;
     margin-bottom: 48px;
+    color: var(--ink);
   }
-  .cover-title em { font-style: italic; color: var(--gold); }
+  .cover-title em { font-style: normal; color: var(--ink); }
 
   .cover-sub {
     font-style: normal;
@@ -154,8 +155,8 @@
     font-family: inherit;
     transition: border-color 0.15s, background 0.15s;
   }
-  .option:hover { border-color: var(--gold); background: rgba(184,134,11,0.04); }
-  .option.sel { border-color: var(--gold); border-width: 1px; background: rgba(184,134,11,0.04); }
+  .option:hover { border-color: var(--gold); background: rgba(158,90,58,0.04); }
+  .option.sel { border-color: var(--gold); border-width: 1px; background: rgba(158,90,58,0.04); }
 
   .opt-mark {
     font-family: 'DM Mono', monospace;
@@ -420,7 +421,7 @@ const Qs = [
     ]
   },
   {
-    text: "Would you make different career choices if your immigration status wasn't a factor?",
+    text: "Would you make different career choices if your immigration status wasn’t a factor?",
     opts: [
       "Yes, I\u2019m holding back because of visa constraints",
       "Somewhat, it influences some decisions",
