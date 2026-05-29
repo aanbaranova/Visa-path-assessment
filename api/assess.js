@@ -16,21 +16,21 @@ THE THREE ROUTES:
 
 SKILLED WORKER VISA:
 - Requires a licensed employer to sponsor you
-- Immigration status is directly tied to that employer - if employment ends, your status becomes precarious and you need to act quickly to secure a new sponsor or resolve your situation
-- Side work is restricted - you cannot freely freelance, consult, or run your own business as a primary income source alongside your sponsored role
-- Every job change requires a new visa application and your new employer must be a licensed sponsor
-- You CAN be employed stably at one company for years - this is the most common use case
+- Immigration status is directly tied to that employer - if employment ends, status becomes precarious and the person must act quickly to secure a new sponsor
+- Side work is restricted - cannot freely freelance, consult, or run a business as a primary income source
+- Every job change requires a new visa application
+- CAN be employed stably at one company for years - most common use case
 - ILR after 5 years (government has proposed extending to 10 years)
 - FITS: people who want stable employment and are comfortable with employer dependency
 - CONFLICTS: people who want career flexibility, multiple income streams, freelancing, or their own business
 
 GLOBAL TALENT VISA:
 - No employer sponsor needed
-- You CAN work as a full-time employee at one company - does NOT require freelancing or self-employment
-- You can also freelance, consult, have multiple income streams, or run a business
-- Key restriction: when extending or applying for ILR, must show earnings and work in your endorsed professional field. If your business or work is in your endorsed field, this is not a problem. If you want to work primarily outside your endorsed field, this is a conflict.
+- CAN work as a full-time employee at one company - does NOT require freelancing or self-employment
+- Can also freelance, consult, have multiple income streams, or run a business
+- Key restriction: when extending or applying for ILR, must show earnings and work in endorsed professional field
 - ILR after 3 years (research/academia) or 5 years (other fields)
-- FITS: people who want freedom to work however they choose - employed, freelance, or running a business - as long as that work is in their endorsed professional field
+- FITS: people who want freedom to work however they choose in their endorsed field - employed, freelance, or running a business
 - CONFLICTS: people who want to work primarily outside their endorsed professional field
 
 INNOVATOR FOUNDER VISA:
@@ -39,8 +39,8 @@ INNOVATOR FOUNDER VISA:
 - Mandatory progress reviews at 12 and 24 months
 - Visa can be cut short if endorsement withdrawn
 - ILR after 3 years if milestones met
-- FITS: people who want to build their own business and accept the accountability structure
-- CONFLICTS: people who want stable employment, need predictable income, or do not want to be tied to one business idea
+- FITS: people who want to build their own business, can accept financial uncertainty, and are comfortable with milestone accountability
+- CONFLICTS: people who want stable employment, need predictable income, or do not want to be tied to one business idea with mandatory reviews
 
 Their answers:
 Q1 (When it comes to your career, which sounds most like you?): ${answers.q1}
@@ -54,29 +54,30 @@ Generate a profile in this EXACT JSON format. Raw JSON only, no markdown, no bac
 
 {
   "priorities": "3-5 values separated by commas, lowercase",
-  "who_they_are": "1 paragraph, 3-4 sentences. Who this person is based on ALL their answers. Cover career direction, financial approach, relationship with visa status, settlement priorities. Do NOT mention any visa. Second person. No apostrophes - use full words instead (e.g. you are instead of you're, do not instead of don't).",
+  "who_they_are": "1 paragraph, 3-4 sentences. Who this person is based on ALL their answers. Cover career direction, financial approach, relationship with visa status, settlement priorities. Do NOT mention any visa. Second person.",
   "routes": ["Route Name"],
-  "route_reasons": "One paragraph per recommended route separated by ||. 2-3 sentences each explaining specifically why it fits their answers. Start each with You. No apostrophes.",
-  "visa_conflicts": "One paragraph per conflicting visa separated by ||. 2-3 sentences each. First sentence: what the person values or needs. Second sentence: the specific visa restriction that conflicts - be precise and accurate, do not overstate restrictions. Third sentence: That makes this route a poor fit. Never start with a visa name - always start with You. No apostrophes."
+  "route_reasons": "One entry per recommended route in format VISANAME: reason. Separate entries with ||. Each reason is 2-3 sentences explaining specifically why it fits. Start each with You.",
+  "visa_conflicts": "One paragraph per conflicting visa separated by ||. 2-3 sentences each. First sentence: what the person values or needs. Second sentence: the specific visa restriction that conflicts - be precise and accurate. Third sentence: That makes this route a poor fit. Never start with a visa name - always start with You."
 }
 
 CRITICAL RULES:
-- Maximum 2 routes
-- When someone wants to freelance or consult, recommend Global Talent Visa only. Do NOT recommend Innovator Founder Visa - freelancing and consulting are not the same as building an endorsed business with milestone accountability.
-- When someone explicitly wants to build and run their own business (not freelance or consult), recommend BOTH Global Talent Visa AND Innovator Founder Visa. In route_reasons for Global Talent, always note it works as long as the business stays in their endorsed professional field. In route_reasons for Innovator Founder, note the milestone accountability structure.
-- When someone wants stable employment at one company, recommend BOTH Skilled Worker Visa AND Global Talent Visa - same career goal but Global Talent does not tie status to employer.
-- When someone wants to work outside their endorsed professional field, recommend ONLY Innovator Founder Visa and flag Global Talent as a conflict.
-- Global Talent ONLY conflicts if the person wants to work primarily outside their endorsed professional field. It does NOT conflict with entrepreneurship or freelancing within their field.
-- Innovator Founder conflicts if someone wants stable employment, needs predictable income, or does not want to be accountable to an endorsing body with milestone reviews.
+- A visa must NEVER appear in both routes and visa_conflicts. Never both.
+- Maximum 2 routes.
+- FINANCIAL PREDICTABILITY TIEBREAKER: If someone wants to build a business BUT also needs predictable income or finds business uncertainty stressful (Q6), do NOT recommend Innovator Founder Visa - recommend Global Talent Visa only, and note in route_reasons that Global Talent allows entrepreneurship while also permitting a return to employment if needed.
+- When someone wants to freelance or consult: recommend Global Talent Visa only. Innovator Founder is for business founders, not freelancers.
+- When someone explicitly wants to build their own business AND is comfortable with financial uncertainty (Q6): recommend BOTH Global Talent Visa AND Innovator Founder Visa.
+- When someone wants stable employment: recommend BOTH Skilled Worker Visa AND Global Talent Visa.
+- When someone wants to work outside their endorsed field: recommend Innovator Founder Visa only.
+- Global Talent ONLY conflicts if the person wants to work primarily outside their endorsed field.
+- Innovator Founder conflicts if someone wants stable employment, needs predictable income, or does not want milestone accountability.
 - Skilled Worker conflicts if someone wants freelancing, multiple income streams, or their own business.
-- When the person answered Q4 (what would stress you more) with "Feeling tied to one professional field", and Global Talent Visa is recommended, the route_reasons for Global Talent MUST explicitly name this tension. Do not mention the endorsed field restriction in passing - dedicate a full sentence to it. For example: "This route does give you flexibility in how you work, but it requires you to show earnings in your endorsed professional field when extending or applying for settlement - given that being tied to one field is your biggest stress point, this is worth thinking through carefully before choosing this route."
-- When mentioning Global Talent Visa settlement timeline, always say "3 or 5 years depending on your field" - never state it as a flat 5 years. Research and academia route is 3 years, other fields are 5 years.
-- When describing Global Talent Visa benefits, never frame it as "you do not have to freelance" or "without any requirement to freelance" - no visa requires freelancing. Instead frame it positively: you can work as an employee, freelance, consult, or run a business - the choice is yours.
-- Always use the exact visa names: Skilled Worker Visa, Global Talent Visa, Innovator Founder Visa. Never shorten to "Skilled Worker route", "Global Talent route", etc.
-- Never start any paragraph with a visa name - always start with You
-- Use hyphens not em dashes
-- No apostrophes anywhere in the output - rephrase to avoid them
-- For Skilled Worker Visa conflicts: say side work is restricted, not prohibited. Say status becomes precarious if employment ends, not that status is lost immediately.`;
+- When Q4 answer is "Feeling tied to one professional field" and Global Talent is recommended: dedicate a full sentence in route_reasons to the endorsed field restriction tension.
+- Global Talent settlement timeline: always say "3 or 5 years depending on your field" - never a flat 5 years.
+- Never frame Global Talent as "you do not have to freelance" - frame positively.
+- Always use exact visa names: Skilled Worker Visa, Global Talent Visa, Innovator Founder Visa.
+- Never start any paragraph with a visa name - always start with You.
+- Use hyphens not em dashes.
+- For Skilled Worker conflicts: say side work is restricted not prohibited. Say status becomes precarious if employment ends, not lost immediately.`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -88,7 +89,7 @@ CRITICAL RULES:
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
-        max_tokens: 1200,
+        max_tokens: 1600,
         messages: [{ role: 'user', content: prompt }]
       })
     });
@@ -109,20 +110,46 @@ CRITICAL RULES:
       parsed = JSON.parse(fixed);
     }
 
-    // Convert pipe-separated fields to arrays
-    if (parsed.visa_conflicts) {
-      parsed.visa_conflicts = parsed.visa_conflicts.split('||').map(s => s.trim()).filter(Boolean);
-    }
-    if (parsed.route_reasons) {
-      parsed.route_reasons = parsed.route_reasons.split('||').map(s => s.trim()).filter(Boolean);
+    // Parse route_reasons into a map keyed by visa name
+    if (parsed.route_reasons && typeof parsed.route_reasons === 'string') {
+      const entries = parsed.route_reasons.split('||').map(s => s.trim()).filter(Boolean);
+      const reasonMap = {};
+      entries.forEach(entry => {
+        const colonIdx = entry.indexOf(':');
+        if (colonIdx > -1) {
+          const key = entry.substring(0, colonIdx).trim();
+          const val = entry.substring(colonIdx + 1).trim();
+          // Normalise key to exact visa name
+          if (key.toLowerCase().includes('skilled')) reasonMap['Skilled Worker Visa'] = val;
+          else if (key.toLowerCase().includes('global')) reasonMap['Global Talent Visa'] = val;
+          else if (key.toLowerCase().includes('innovator')) reasonMap['Innovator Founder Visa'] = val;
+        } else {
+          // No colon - fallback, assign to first unmatched route
+          reasonMap['_fallback_' + Object.keys(reasonMap).length] = entry;
+        }
+      });
+      parsed.route_reasons = reasonMap;
     }
 
-    // Replace straight apostrophes with smart ones in all string fields
-    const smartify = str => str.replace(/'/g, '\u2019');
+    // Parse visa_conflicts to array
+    if (parsed.visa_conflicts && typeof parsed.visa_conflicts === 'string') {
+      parsed.visa_conflicts = parsed.visa_conflicts.split('||').map(s => s.trim()).filter(Boolean);
+    }
+
+    // Replace straight apostrophes and literal unicode escapes with smart apostrophes
+    const smartify = str => str
+      .replace(/\\u2019/g, '\u2019')
+      .replace(/\u2018/g, '\u2019')
+      .replace(/'/g, '\u2019');
+
     if (parsed.priorities) parsed.priorities = smartify(parsed.priorities);
     if (parsed.who_they_are) parsed.who_they_are = smartify(parsed.who_they_are);
-    if (parsed.visa_conflicts) parsed.visa_conflicts = parsed.visa_conflicts.map(smartify);
-    if (parsed.route_reasons) parsed.route_reasons = parsed.route_reasons.map(smartify);
+    if (Array.isArray(parsed.visa_conflicts)) parsed.visa_conflicts = parsed.visa_conflicts.map(smartify);
+    if (parsed.route_reasons && typeof parsed.route_reasons === 'object') {
+      Object.keys(parsed.route_reasons).forEach(k => {
+        parsed.route_reasons[k] = smartify(parsed.route_reasons[k]);
+      });
+    }
 
     res.status(200).json(parsed);
 
