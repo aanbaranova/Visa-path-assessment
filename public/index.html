@@ -395,7 +395,7 @@
 <!-- RESULT -->
 <section id="result" class="hidden">
   <div class="result-label">Your profile</div>
-  <h2 class="result-title">Here\u2019s what your answers reveal</h2>
+  <h2 class="result-title">Here's what your answers reveal</h2>
   <div id="resultBody"></div>
   <button class="btn-restart" onclick="restart()">Start again</button>
 </section>
@@ -525,10 +525,12 @@ async function submit() {
       i < priCapitalised.length-1 ? w+',' : 'and '+w+'.'
     ).join(' ');
 
-    const routeReasonsArr = Array.isArray(p.route_reasons) ? p.route_reasons : (p.route_reasons ? [p.route_reasons] : []);
+    const reasonMap = (p.route_reasons && typeof p.route_reasons === 'object' && !Array.isArray(p.route_reasons))
+      ? p.route_reasons
+      : {};
 
-    const routesHtml = p.routes.map((r, i) => {
-      const reason = routeReasonsArr[i] || '';
+    const routesHtml = p.routes.map(r => {
+      const reason = reasonMap[r] || (Array.isArray(p.route_reasons) ? p.route_reasons[p.routes.indexOf(r)] : '') || '';
       return '<div style="margin-bottom:24px;"><div class="r-route-tag" style="display:inline-block;">'+r+'</div>'+(reason ? '<p style="margin-top:14px;font-family:\'Libre Baskerville\',serif;font-size:clamp(14px,1.6vw,17px);line-height:1.75;color:#0d0c0a;">'+reason+'</p>' : '')+'</div>';
     }).join('');
 
