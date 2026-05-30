@@ -395,7 +395,7 @@
 <!-- RESULT -->
 <section id="result" class="hidden">
   <div class="result-label">Your profile</div>
-  <h2 class="result-title">Here's what your answers reveal</h2>
+  <h2 class="result-title">Here’s what your answers reveal</h2>
   <div id="resultBody"></div>
   <button class="btn-restart" onclick="restart()">Start again</button>
 </section>
@@ -640,18 +640,25 @@ function bgBloom(x, y, r, colorInner, colorOuter) {
 }
 
 function bgStem(x1, y1, x2, y2, color, width, angle) {
-  bgCtx.save();
-  bgCtx.filter = 'blur(12px)';
-  bgCtx.strokeStyle = color;
-  bgCtx.lineWidth = width;
-  bgCtx.lineCap = 'round';
-  const cx = (x1+x2)/2 + Math.cos(angle*Math.PI/180)*60;
-  const cy = (y1+y2)/2 + Math.sin(angle*Math.PI/180)*60;
-  bgCtx.beginPath();
-  bgCtx.moveTo(x1, y1);
-  bgCtx.quadraticCurveTo(cx, cy, x2, y2);
-  bgCtx.stroke();
-  bgCtx.restore();
+  // Replace stems with shapeless diffuse blobs along the path
+  const steps = 4;
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    const cx = (x1+x2)/2 + Math.cos(angle*Math.PI/180)*80;
+    const cy = (y1+y2)/2 + Math.sin(angle*Math.PI/180)*80;
+    const bx = (1-t)*(1-t)*x1 + 2*(1-t)*t*cx + t*t*x2;
+    const by = (1-t)*(1-t)*y1 + 2*(1-t)*t*cy + t*t*y2;
+    const g = bgCtx.createRadialGradient(bx, by, 0, bx, by, width * 6);
+    g.addColorStop(0, color);
+    g.addColorStop(1, color.replace(/[\d.]+\)$/, '0)'));
+    bgCtx.save();
+    bgCtx.filter = 'blur(38px)';
+    bgCtx.fillStyle = g;
+    bgCtx.beginPath();
+    bgCtx.ellipse(bx, by, width * 5, width * 7, angle * Math.PI / 180, 0, Math.PI * 2);
+    bgCtx.fill();
+    bgCtx.restore();
+  }
 }
 
 window.addEventListener('resize', bgResize);
